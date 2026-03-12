@@ -16,6 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(roleDatalist);
     });
 
+    const tabIndexMap = {
+        'ban_0': 1, 'ban_5': 2, 'ban_1': 3, 'ban_6': 4, 'ban_2': 5, 'ban_7': 6,
+        't1_top_champ': 7, 't2_top_champ': 8, 't2_jungle_champ': 9, 't1_jungle_champ': 10,
+        't1_mid_champ': 11, 't2_mid_champ': 12,
+        'ban_8': 13, 'ban_3': 14, 'ban_9': 15, 'ban_4': 16,
+        't2_bot_champ': 17, 't1_bot_champ': 18, 't1_support_champ': 19, 't2_support_champ': 20
+    };
+
     // Populate Bans
     const bansContainer = document.getElementById('bans-container');
     for(let i = 0; i < 10; i++) {
@@ -25,11 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
         let teamLabel = i < 5 ? `<span style="color: #3498db; font-size: 0.8rem; font-weight: 600;">Ban Équipe 1</span>` 
                               : `<span style="color: #e74c3c; font-size: 0.8rem; font-weight: 600;">Ban Équipe 2</span>`;
         
+        const ti = tabIndexMap[`ban_${i}`] || '';
+        
         banGroup.innerHTML = `
             ${teamLabel}
             <div class="input-with-icon">
                 <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30'><rect width='30' height='30' fill='%23333'/></svg>" class="champ-preview-img" alt="?">
-                <input type="text" name="ban_${i}" class="ban-select" list="characters-list" placeholder="Nom du personnage...">
+                <input type="text" name="ban_${i}" class="ban-select" list="characters-list" placeholder="Nom du personnage..." tabindex="${ti}">
             </div>
         `;
         bansContainer.appendChild(banGroup);
@@ -39,22 +49,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const team1Container = document.getElementById('team1-picks');
     const team2Container = document.getElementById('team2-picks');
 
-    let tabCounterT1 = 10;
-    let tabCounterT2 = 100;
-
     roles.forEach((role) => {
+        const t1ChampName = `t1_${role.toLowerCase()}_champ`;
+        const t2ChampName = `t2_${role.toLowerCase()}_champ`;
+        
+        const tiT1 = tabIndexMap[t1ChampName] || '';
+        const tiT2 = tabIndexMap[t2ChampName] || '';
+
         // Team 1
         team1Container.innerHTML += `
             <div class="pick-row">
                 <div class="role-icon">${role.substring(0,3)}</div>
                 <div class="input-with-icon">
                     <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30'><rect width='30' height='30' fill='%23333'/></svg>" class="champ-preview-img" alt="?">
-                    <input type="text" name="t1_${role.toLowerCase()}_champ" class="pick-select" list="characters-list-${role.toLowerCase()}" placeholder="Personnage" required tabindex="${tabCounterT1++}">
+                    <input type="text" name="${t1ChampName}" class="pick-select" list="characters-list-${role.toLowerCase()}" placeholder="Personnage" required tabindex="${tiT1}">
                 </div>
                 <div class="kda-inputs">
-                    <input type="number" name="t1_${role.toLowerCase()}_k" value="0" required min="0" tabindex="${tabCounterT1++}">
-                    <input type="number" name="t1_${role.toLowerCase()}_d" value="0" required min="0" tabindex="${tabCounterT1++}">
-                    <input type="number" name="t1_${role.toLowerCase()}_a" value="0" required min="0" tabindex="${tabCounterT1++}">
+                    <input type="number" name="t1_${role.toLowerCase()}_k" value="0" required min="0">
+                    <input type="number" name="t1_${role.toLowerCase()}_d" value="0" required min="0">
+                    <input type="number" name="t1_${role.toLowerCase()}_a" value="0" required min="0">
                 </div>
             </div>
         `;
@@ -65,12 +78,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="role-icon">${role.substring(0,3)}</div>
                 <div class="input-with-icon">
                     <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30'><rect width='30' height='30' fill='%23333'/></svg>" class="champ-preview-img" alt="?">
-                    <input type="text" name="t2_${role.toLowerCase()}_champ" class="pick-select" list="characters-list-${role.toLowerCase()}" placeholder="Personnage" required tabindex="${tabCounterT2++}">
+                    <input type="text" name="${t2ChampName}" class="pick-select" list="characters-list-${role.toLowerCase()}" placeholder="Personnage" required tabindex="${tiT2}">
                 </div>
                 <div class="kda-inputs">
-                    <input type="number" name="t2_${role.toLowerCase()}_k" value="0" required min="0" tabindex="${tabCounterT2++}">
-                    <input type="number" name="t2_${role.toLowerCase()}_d" value="0" required min="0" tabindex="${tabCounterT2++}">
-                    <input type="number" name="t2_${role.toLowerCase()}_a" value="0" required min="0" tabindex="${tabCounterT2++}">
+                    <input type="number" name="t2_${role.toLowerCase()}_k" value="0" required min="0">
+                    <input type="number" name="t2_${role.toLowerCase()}_d" value="0" required min="0">
+                    <input type="number" name="t2_${role.toLowerCase()}_a" value="0" required min="0">
                 </div>
             </div>
         `;
