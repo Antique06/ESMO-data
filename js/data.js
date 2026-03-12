@@ -80,7 +80,7 @@ window.characterRoles = {
     "Reaper": ["JUNGLE"],
     "Riptide": ["MID"],
     "Seeker": ["BOT"],
-    "Sentinel": ["TOP"],
+    "Sentinel": ["TOP", "SUPPORT"],
     "Sludge": ["BOT"],
     "Smith": ["TOP"],
     "Sniper": ["BOT"],
