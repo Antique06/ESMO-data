@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Détails du Champion</title>
+    <!-- Import Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/homePage.css">
+    <link rel="stylesheet" href="css/character.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Re-use navigation -->
+        <header class="app-header">
+            <nav class="app-nav">
+                <a href="index.html" class="nav-link">Statistiques</a>
+                <a href="addMatch.html" class="nav-link">Ajouter un match</a>
+            </nav>
+            <h1 id="page-title">Détails du Personnage</h1>
+        </header>
+
+        <main class="character-dashboard">
+            <!-- Loading Indicator -->
+            <div id="loading-indicator" class="loading-state">
+                <div class="spinner"></div>
+                <p>Analyse des données depuis Firebase...</p>
+            </div>
+
+            <!-- Dashboard Content (Hidden until loaded) -->
+            <div id="dashboard-content" style="display: none;">
+                
+                <!-- Header Card (Profile & Global Stats) -->
+                <div class="card profile-card">
+                    <div class="profile-left">
+                        <img id="champ-img" src="" alt="Champion" class="large-champ-img">
+                        <div class="profile-info">
+                            <h2 id="champ-name">Nom du Champion</h2>
+                            <div class="role-badge" id="champ-role">Rôle</div>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Winrate</span>
+                            <span class="stat-value" id="global-winrate">--%</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">KDA Moyen</span>
+                            <span class="stat-value" id="global-kda">-- / -- / --</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Matchs Joués</span>
+                            <span class="stat-value" id="global-matches">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Analysis Grid -->
+                <div class="analysis-grid">
+                    
+                    <!-- Matchups Column -->
+                    <div class="card analysis-card">
+                        <h3>Matchups Directs</h3>
+                        <p class="card-subtitle">Performances contre les autres <span class="role-highlight">Sélectionnez-un-rôle</span></p>
+                        
+                        <div class="matchup-list" id="matchups-container">
+                            <!-- Javascript will populate this -->
+                            <div class="empty-state">Données insuffisantes...</div>
+                        </div>
+                    </div>
+
+                    <!-- Synergy Column -->
+                    <div class="card analysis-card">
+                        <h3>Synergies (Alliés)</h3>
+                        <p class="card-subtitle">Taux de victoire aux côtés de...</p>
+                        
+                        <div class="matchup-list" id="synergy-container">
+                            <!-- Javascript will populate this -->
+                            <div class="empty-state">Données insuffisantes...</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            <!-- Error State -->
+            <div id="error-indicator" class="error-state" style="display: none;">
+                <p id="error-message">Une erreur est survenue.</p>
+                <a href="index.html" class="back-link">Retour aux statistiques</a>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <!-- Firebase Firestore -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <script src="js/data.js"></script>
+    <script src="js/character.js"></script>
+</body>
+</html>

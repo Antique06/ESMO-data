@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>ESMO Stats</title>
+    <!-- Import Google Fonts for a modern look (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/homePage.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <nav class="app-nav">
+                <a href="index.html" class="nav-link active">Statistiques</a>
+                <a href="addMatch.html" class="nav-link">Ajouter un match</a>
+            </nav>
+            <h1>ESMO Statistics</h1>
+            <p>Analyse des performances des personnages</p>
+        </header>
+
+        <div class="role-filters" id="role-filters">
+            <button class="filter-btn active" data-role="all">Tous</button>
+            <button class="filter-btn" data-role="top">Top</button>
+            <button class="filter-btn" data-role="jungle">Jungle</button>
+            <button class="filter-btn" data-role="mid">Mid</button>
+            <button class="filter-btn" data-role="bot">Bot</button>
+            <button class="filter-btn" data-role="support">Support</button>
+        </div>
+
+        <main class="stats-board">
+            <div class="table-header">
+                <div class="col-rank">#</div>
+                <div class="col-champ sortable" data-sort="name">Personnage <span class="sort-icon"></span></div>
+                <div class="col-role sortable" data-sort="role">Rôle(s) <span class="sort-icon"></span></div>
+                <div class="col-tier sortable" data-sort="tier">Tier <span class="sort-icon"></span></div>
+                <div class="col-winrate sortable active" data-sort="winrate">Win Rate <span
+                        class="sort-icon desc"></span></div>
+                <div class="col-pickrate sortable" data-sort="pickrate">Pick Rate <span class="sort-icon"></span></div>
+                <div class="col-banrate sortable" data-sort="banrate">Ban Rate <span class="sort-icon"></span></div>
+            </div>
+            <div class="characterPlace" id="character-list">
+                <div class="loading-state" id="loading-indicator">
+                    <div class="spinner"></div>
+                    <p>Chargement des statistiques depuis Firebase...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <!-- Firebase Firestore -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <script src="js/data.js"></script>
+    <script src="js/homePage.js"></script>
+</body>
+
+</html>

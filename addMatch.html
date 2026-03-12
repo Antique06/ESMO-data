@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>ESMO Stats - Ajouter un match</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/homePage.css">
+    <link rel="stylesheet" href="css/addMatch.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <nav class="app-nav">
+                <a href="index.html" class="nav-link">Statistiques</a>
+                <a href="addMatch.html" class="nav-link active">Ajouter un match</a>
+            </nav>
+            <h1>Nouveau Match</h1>
+            <p>Saisissez les données de la partie pour enrichir les statistiques</p>
+        </header>
+
+        <main class="match-form-container">
+            <form id="add-match-form" class="match-form">
+
+                <section class="form-section winner-section">
+                    <h2>Résultat du Match</h2>
+                    <div class="winner-toggle">
+                        <input type="radio" name="winner" id="win-team1" value="team1" checked>
+                        <label for="win-team1" class="team-label blue-team">Victoire Équipe 1 (Bleue)</label>
+
+                        <input type="radio" name="winner" id="win-team2" value="team2">
+                        <label for="win-team2" class="team-label red-team">Victoire Équipe 2 (Rouge)</label>
+                    </div>
+                </section>
+
+                <section class="form-section bans-section">
+                    <h2>Bans de la partie</h2>
+                    <div class="bans-grid" id="bans-container">
+                        <!-- Populated by JS: 5 bans team 1, 5 bans team 2 -->
+                    </div>
+                </section>
+
+                <div class="teams-container">
+                    <section class="form-section team-section team1">
+                        <h2>Équipe 1 (Bleue)</h2>
+                        <div class="picks-container" id="team1-picks">
+                            <!-- Populated by JS -->
+                        </div>
+                    </section>
+
+                    <section class="form-section team-section team2">
+                        <h2>Équipe 2 (Rouge)</h2>
+                        <div class="picks-container" id="team2-picks">
+                            <!-- Populated by JS -->
+                        </div>
+                    </section>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn" id="submit-btn">
+                        <span class="btn-text">Enregistrer le match</span>
+                        <div class="spinner" id="submit-spinner" style="display: none;"></div>
+                    </button>
+                    <div id="form-message" class="form-message"></div>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <!-- Firebase Firestore -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <script src="js/data.js"></script>
+    <script src="js/addMatch.js"></script>
+</body>
+
+</html>
