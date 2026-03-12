@@ -165,6 +165,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Handle Tab autocomplete
+    document.addEventListener('keydown', (e) => {
+        if ((e.target.classList.contains('pick-select') || e.target.classList.contains('ban-select')) && e.key === 'Tab') {
+            const input = e.target;
+            const val = input.value.trim().toLowerCase();
+            if (val) {
+                const datalist = input.list;
+                if (datalist) {
+                    const options = Array.from(datalist.options);
+                    const matchingOptions = options.filter(opt => opt.value.toLowerCase().includes(val));
+                    
+                    if (matchingOptions.length === 1) {
+                        input.value = matchingOptions[0].value;
+                        input.dispatchEvent(new Event('input', { bubbles: true }));
+                        input.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+                }
+            }
+        }
+    });
+
     // Handle Image Previews
     document.querySelectorAll('.input-with-icon input').forEach(input => {
         input.addEventListener('input', (e) => {
