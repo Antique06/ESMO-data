@@ -5,8 +5,8 @@
     <title>Détails du Champion</title>
     <!-- Import Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/homePage.css">
-    <link rel="stylesheet" href="css/character.css">
+    <link rel="stylesheet" href="css/homePage.css?v=2">
+    <link rel="stylesheet" href="css/character.css?v=2">
 </head>
 <body>
     <div class="app-container">
@@ -15,6 +15,7 @@
             <nav class="app-nav">
                 <a href="index.html" class="nav-link">Statistiques</a>
                 <a href="addMatch.html" class="nav-link">Ajouter un match</a>
+                <a href="manageMatches.html" class="nav-link">Gérer les matchs</a>
             </nav>
             <h1 id="page-title">Détails du Personnage</h1>
         </header>
@@ -43,6 +44,14 @@
                         <div class="stat-box">
                             <span class="stat-label">Winrate</span>
                             <span class="stat-value" id="global-winrate">--%</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Pick Rate</span>
+                            <span class="stat-value" id="global-pickrate">--%</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Ban Rate</span>
+                            <span class="stat-value" id="global-banrate">--%</span>
                         </div>
                         <div class="stat-box">
                             <span class="stat-label">KDA Moyen</span>
@@ -97,7 +106,7 @@
     <!-- Firebase Firestore -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-    <script src="js/data.js"></script>
-    <script src="js/character.js"></script>
+    <script src="js/data.js?v=2"></script>
+    <script src="js/character.js?v=2"></script>
 </body>
 </html>

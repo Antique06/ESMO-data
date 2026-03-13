@@ -80,8 +80,26 @@ document.addEventListener('DOMContentLoaded', async () => {
         const avgD = (totalDeaths / totalMatches).toFixed(1);
         const avgA = (totalAssists / totalMatches).toFixed(1);
 
+        // Fetch global champion data for Pick/Ban Rates
+        const matchesSnap = await db.collection("matches").get();
+        const globalTotalMatches = matchesSnap.size;
+
+        const champDoc = await db.collection("champions").doc(champParam).get();
+        let globalPickRate = "0.0%";
+        let globalBanRate = "0.0%";
+        
+        if (globalTotalMatches > 0 && champDoc.exists) {
+            const data = champDoc.data();
+            const p = data.picks || 0;
+            const b = data.bans || 0;
+            globalPickRate = ((p / globalTotalMatches) * 100).toFixed(1) + "%";
+            globalBanRate = ((b / globalTotalMatches) * 100).toFixed(1) + "%";
+        }
+
         // Update UI
         document.getElementById('global-matches').textContent = totalMatches;
+        document.getElementById('global-pickrate').textContent = globalPickRate;
+        document.getElementById('global-banrate').textContent = globalBanRate;
         
         const winrateEl = document.getElementById('global-winrate');
         winrateEl.textContent = `${globalWinrate}%`;

@@ -1,0 +1,145 @@
+/* Styles spécifiques à la page de gestion des matchs */
+
+.matches-board {
+    background: var(--surface-color);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.table-header, .table-row {
+    display: grid;
+    /* Date, Winner, Team1, Team2, Actions */
+    grid-template-columns: 1fr 1fr 2.5fr 2.5fr 1fr;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.table-header {
+    background: rgba(0, 0, 0, 0.2);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.table-row {
+    transition: background-color 0.2s ease;
+    animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+}
+
+.table-row:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.col-date {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.col-winner {
+    font-weight: 600;
+}
+
+.winner-team1 {
+    color: #3498db;
+}
+
+.winner-team2 {
+    color: #e74c3c;
+}
+
+.col-team1, .col-team2 {
+    display: flex;
+    gap: 0.3rem;
+    flex-wrap: wrap;
+}
+
+.champ-mini-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: #2b2b2b;
+}
+
+.col-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-delete {
+    background: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+    border: 1px solid rgba(231, 76, 60, 0.3);
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-delete:hover {
+    background: #e74c3c;
+    color: white;
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-delete:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.pagination-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: rgba(0, 0, 0, 0.1);
+    border-top: 1px solid var(--border-color);
+}
+
+.btn-pagination {
+    background: rgba(30, 30, 46, 0.6);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-pagination:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-pagination:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.page-info {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* Spinner pour la suppression inside row */
+.spinner-small {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+}

@@ -54,9 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const roles = characterRoles[name] || [];
                 
                 // Global stats for this champ
-                const champInfo = champsData[name] || { picks: 0, bans: 0 };
-                const globalPickRate = totalMatches > 0 ? ((champInfo.picks / totalMatches) * 100).toFixed(1) : 0;
-                const globalBanRate = totalMatches > 0 ? ((champInfo.bans / totalMatches) * 100).toFixed(1) : 0;
+                const champInfo = champsData[name] || {};
+                const picks = champInfo.picks || 0;
+                const bans = champInfo.bans || 0;
+                const globalPickRate = totalMatches > 0 ? ((picks / totalMatches) * 100).toFixed(1) : 0;
+                const globalBanRate = totalMatches > 0 ? ((bans / totalMatches) * 100).toFixed(1) : 0;
 
                 roles.forEach(role => {
                     // Role-specific stats
@@ -209,6 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const icon = header.querySelector('.sort-icon');
             if (icon) icon.classList.add(currentSort.direction);
 
+            sortData();
             renderTable();
         });
     });

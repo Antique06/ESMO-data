@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>ESMO Stats - Gérer les matchs</title>
+    <!-- Import Google Fonts for a modern look (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/homePage.css">
+    <link rel="stylesheet" href="css/manageMatches.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <nav class="app-nav">
+                <a href="index.html" class="nav-link">Statistiques</a>
+                <a href="addMatch.html" class="nav-link">Ajouter un match</a>
+                <a href="manageMatches.html" class="nav-link active">Gérer les matchs</a>
+            </nav>
+            <h1>Gestion des Matchs</h1>
+            <p>Consultez et supprimez les matchs récents</p>
+        </header>
+
+        <main class="matches-board">
+            <div class="table-header">
+                <div class="col-date">Date</div>
+                <div class="col-winner">Vainqueur</div>
+                <div class="col-team1">Équipe 1 (Bleue)</div>
+                <div class="col-team2">Équipe 2 (Rouge)</div>
+                <div class="col-actions">Actions</div>
+            </div>
+            <div class="matchPlace" id="match-list">
+                <div class="loading-state" id="loading-indicator">
+                    <div class="spinner"></div>
+                    <p>Chargement des matchs depuis Firebase...</p>
+                </div>
+            </div>
+            
+            <div class="pagination-controls" id="pagination-controls" style="display: none;">
+                <button id="btn-prev" class="btn-pagination" disabled>Précédent</button>
+                <span id="page-info" class="page-info">Page 1</span>
+                <button id="btn-next" class="btn-pagination">Suivant</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <!-- Firebase Firestore -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <script src="js/data.js?v=2"></script>
+    <script src="js/manageMatches.js"></script>
+</body>
+
+</html>
