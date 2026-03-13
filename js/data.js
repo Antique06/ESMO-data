@@ -60,7 +60,7 @@ window.characterRoles = {
     "Inquisitor": ["BOT"],
     "Jester": ["JUNGLE"],
     "Juggler": ["BOT"],
-    "Kunai": ["MID"],
+    "Kunai": ["TOP", "MID"],
     "Lancer": ["SUPPORT"],
     "Leviathan": ["JUNGLE"],
     "Lupine": ["JUNGLE"],
