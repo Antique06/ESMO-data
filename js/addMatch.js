@@ -4,12 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const roles = ["Top", "Jungle", "Mid", "Bot", "Support"];
     const characterRoles = window.characterRoles;
-    
+
     // Create empty datalist containers
     const banDatalist = document.createElement('datalist');
     banDatalist.id = 'characters-list';
     document.body.appendChild(banDatalist);
-    
+
     roles.forEach(role => {
         const roleDatalist = document.createElement('datalist');
         roleDatalist.id = `characters-list-${role.toLowerCase()}`;
@@ -17,24 +17,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const tabIndexMap = {
-        'ban_0': 1, 'ban_5': 2, 'ban_1': 3, 'ban_6': 4, 'ban_2': 5, 'ban_7': 6,
-        't1_top_champ': 7, 't2_top_champ': 8, 't2_jungle_champ': 9, 't1_jungle_champ': 10,
-        't1_mid_champ': 11, 't2_mid_champ': 12,
-        'ban_8': 13, 'ban_3': 14, 'ban_9': 15, 'ban_4': 16,
-        't2_bot_champ': 17, 't1_bot_champ': 18, 't1_support_champ': 19, 't2_support_champ': 20
+        't1_top_champ': 1, 't1_jungle_champ': 2, 't1_mid_champ': 3, 't1_bot_champ': 4, 't1_support_champ': 5,
+        't2_top_champ': 6, 't2_jungle_champ': 7, 't2_mid_champ': 8, 't2_bot_champ': 9, 't2_support_champ': 10,
+        'ban_0': 11, 'ban_1': 12, 'ban_2': 13, 'ban_3': 14, 'ban_4': 15,
+        'ban_5': 16, 'ban_6': 17, 'ban_7': 18, 'ban_8': 19, 'ban_9': 20
     };
 
     // Populate Bans
     const bansContainer = document.getElementById('bans-container');
-    for(let i = 0; i < 10; i++) {
+    for (let i = 0; i < 10; i++) {
         const banGroup = document.createElement('div');
         banGroup.className = 'ban-group';
-        
-        let teamLabel = i < 5 ? `<span style="color: #3498db; font-size: 0.8rem; font-weight: 600;">Ban Équipe 1</span>` 
-                              : `<span style="color: #e74c3c; font-size: 0.8rem; font-weight: 600;">Ban Équipe 2</span>`;
-        
+
+        let teamLabel = i < 5 ? `<span style="color: #3498db; font-size: 0.8rem; font-weight: 600;">Ban Équipe 1</span>`
+            : `<span style="color: #e74c3c; font-size: 0.8rem; font-weight: 600;">Ban Équipe 2</span>`;
+
         const ti = tabIndexMap[`ban_${i}`] || '';
-        
+
         banGroup.innerHTML = `
             ${teamLabel}
             <div class="input-with-icon">
@@ -52,14 +51,14 @@ document.addEventListener('DOMContentLoaded', () => {
     roles.forEach((role) => {
         const t1ChampName = `t1_${role.toLowerCase()}_champ`;
         const t2ChampName = `t2_${role.toLowerCase()}_champ`;
-        
+
         const tiT1 = tabIndexMap[t1ChampName] || '';
         const tiT2 = tabIndexMap[t2ChampName] || '';
 
         // Team 1
         team1Container.innerHTML += `
             <div class="pick-row">
-                <div class="role-icon">${role.substring(0,3)}</div>
+                <div class="role-icon">${role.substring(0, 3)}</div>
                 <div class="input-with-icon">
                     <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30'><rect width='30' height='30' fill='%23333'/></svg>" class="champ-preview-img" alt="?">
                     <input type="text" name="${t1ChampName}" class="pick-select" list="characters-list-${role.toLowerCase()}" placeholder="Personnage" required tabindex="${tiT1}">
@@ -71,11 +70,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
         `;
-        
+
         // Team 2
         team2Container.innerHTML += `
             <div class="pick-row">
-                <div class="role-icon">${role.substring(0,3)}</div>
+                <div class="role-icon">${role.substring(0, 3)}</div>
                 <div class="input-with-icon">
                     <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30'><rect width='30' height='30' fill='%23333'/></svg>" class="champ-preview-img" alt="?">
                     <input type="text" name="${t2ChampName}" class="pick-select" list="characters-list-${role.toLowerCase()}" placeholder="Personnage" required tabindex="${tiT2}">
@@ -91,19 +90,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateDatalists(changedInput = null) {
         const allInputs = document.querySelectorAll('.ban-select, .pick-select');
-        
+
         // 1. Strict Validation on changed input
         if (changedInput) {
             const val = changedInput.value.trim();
             if (val) {
                 let isValid = false;
-                
+
                 // Check if valid character at all
                 const matchedChar = characters.find(c => c.toLowerCase() === val.toLowerCase());
-                
+
                 if (matchedChar) {
                     changedInput.value = matchedChar; // Fix casing automatically
-                    
+
                     if (changedInput.classList.contains('pick-select')) {
                         const roleMatch = changedInput.name.match(/t\d_([a-z]+)_champ/);
                         if (roleMatch) {
@@ -115,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else if (changedInput.classList.contains('ban-select')) {
                         isValid = true;
                     }
-                    
+
                     // Check for duplicates
                     if (isValid) {
                         let count = 0;
@@ -188,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (datalist) {
                     const options = Array.from(datalist.options);
                     const matchingOptions = options.filter(opt => opt.value.toLowerCase().includes(val));
-                    
+
                     if (matchingOptions.length === 1) {
                         input.value = matchingOptions[0].value;
                         input.dispatchEvent(new Event('input', { bubbles: true }));
@@ -204,10 +203,10 @@ document.addEventListener('DOMContentLoaded', () => {
         input.addEventListener('input', (e) => {
             const val = e.target.value.trim();
             const imgEl = e.target.previousElementSibling;
-            
+
             // Check if input value matches any character (case insensitive)
             const matchedChar = characters.find(c => c.toLowerCase() === val.toLowerCase());
-            
+
             if (matchedChar) {
                 imgEl.src = `images/${matchedChar}.png`;
                 e.target.value = matchedChar; // Auto-correct case
@@ -216,32 +215,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 imgEl.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30'><rect width='30' height='30' fill='%23333'/></svg>";
             }
         });
-        
+
         // UX Improvements
-        
+
         // Auto-select text on focus for KDA inputs
         const kdaInputs = input.parentElement.parentElement.querySelectorAll('.kda-inputs input');
         kdaInputs.forEach((kdaInput, index) => {
-            kdaInput.addEventListener('focus', function() {
+            kdaInput.addEventListener('focus', function () {
                 this.select();
             });
-            
+
             // Smart Paste for Kills input
-            if(index === 0) { // If it's the "K" input
-                kdaInput.addEventListener('paste', function(e) {
+            if (index === 0) { // If it's the "K" input
+                kdaInput.addEventListener('paste', function (e) {
                     e.preventDefault();
                     const pasteData = (e.clipboardData || window.clipboardData).getData('text');
-                    
+
                     // Match formats like 10/2/5, 10-2-5, 10 2 5
                     const kdaMatch = pasteData.match(/(\d+)[\/\-\s]+(\d+)[\/\-\s]+(\d+)/);
-                    if(kdaMatch && kdaMatch.length === 4) {
+                    if (kdaMatch && kdaMatch.length === 4) {
                         this.value = kdaMatch[1]; // K
                         kdaInputs[1].value = kdaMatch[2]; // D
                         kdaInputs[2].value = kdaMatch[3]; // A
-                        
+
                         // Move focus to next champ select or submit
                         const nextSelect = kdaInputs[2].closest('.pick-row').nextElementSibling?.querySelector('.pick-select');
-                        if(nextSelect) nextSelect.focus();
+                        if (nextSelect) nextSelect.focus();
                     }
                 });
             }
@@ -257,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
         if (!db) {
             showMessage('Erreur: Connexion à la base de données (Firebase) non initialisée.', 'error');
             return;
@@ -272,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             const formData = new FormData(form);
-            
+
             // Construct Match Data Object
             const matchData = {
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
@@ -288,15 +287,15 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             // Extract Bans
-            for(let i = 0; i < 5; i++) {
+            for (let i = 0; i < 5; i++) {
                 const b1 = formData.get(`ban_${i}`);
                 if (b1) {
                     // Match casing with character list
                     const matchedB1 = characters.find(c => c.toLowerCase() === b1.trim().toLowerCase());
                     if (matchedB1) matchData.bans.team1.push(matchedB1);
                 }
-                
-                const b2 = formData.get(`ban_${i+5}`);
+
+                const b2 = formData.get(`ban_${i + 5}`);
                 if (b2) {
                     const matchedB2 = characters.find(c => c.toLowerCase() === b2.trim().toLowerCase());
                     if (matchedB2) matchData.bans.team2.push(matchedB2);
@@ -306,14 +305,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Extract Picks
             for (const role of roles) {
                 const roleKey = role.toLowerCase();
-                
+
                 // Process Team 1 Pick
                 let t1Champ = formData.get(`t1_${roleKey}_champ`);
-                if(t1Champ) {
+                if (t1Champ) {
                     const matched = characters.find(c => c.toLowerCase() === t1Champ.trim().toLowerCase());
                     t1Champ = matched || t1Champ;
                 }
-                
+
                 matchData.teams.team1[roleKey] = {
                     champion: t1Champ,
                     kda: {
@@ -322,14 +321,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         assists: parseInt(formData.get(`t1_${roleKey}_a`)) || 0
                     }
                 };
-                
+
                 // Process Team 2 Pick
                 let t2Champ = formData.get(`t2_${roleKey}_champ`);
-                if(t2Champ) {
+                if (t2Champ) {
                     const matched = characters.find(c => c.toLowerCase() === t2Champ.trim().toLowerCase());
                     t2Champ = matched || t2Champ;
                 }
-                
+
                 matchData.teams.team2[roleKey] = {
                     champion: t2Champ,
                     kda: {
@@ -343,14 +342,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // --- VALIDATION RULES ---
             const allSelectedChamps = [];
             let validationError = null;
-            
+
             // Validate Bans
             const allBans = [...matchData.bans.team1, ...matchData.bans.team2];
             allBans.forEach(ban => {
-                if(!characters.includes(ban)) {
+                if (!characters.includes(ban)) {
                     validationError = `Le ban "${ban}" n'est pas un personnage valide.`;
                 }
-                if(allSelectedChamps.includes(ban)) {
+                if (allSelectedChamps.includes(ban)) {
                     validationError = `Le personnage "${ban}" est banni plusieurs fois !`;
                 }
                 allSelectedChamps.push(ban);
@@ -361,15 +360,15 @@ document.addEventListener('DOMContentLoaded', () => {
             // Validate Picks
             for (const role of roles) {
                 const roleKey = role.toLowerCase();
-                
+
                 // Validate Team 1
                 const t1Champ = matchData.teams.team1[roleKey].champion;
-                if(t1Champ) {
-                    if(!characters.includes(t1Champ)) {
+                if (t1Champ) {
+                    if (!characters.includes(t1Champ)) {
                         validationError = `Le choix T1 ${role} "${t1Champ}" n'est pas valide.`;
                         break;
                     }
-                    if(allSelectedChamps.includes(t1Champ)) {
+                    if (allSelectedChamps.includes(t1Champ)) {
                         validationError = `Le personnage "${t1Champ}" a été choisi plusieurs fois ou a été banni !`;
                         break;
                     }
@@ -378,12 +377,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Validate Team 2
                 const t2Champ = matchData.teams.team2[roleKey].champion;
-                if(t2Champ) {
-                     if(!characters.includes(t2Champ)) {
+                if (t2Champ) {
+                    if (!characters.includes(t2Champ)) {
                         validationError = `Le choix T2 ${role} "${t2Champ}" n'est pas valide.`;
                         break;
                     }
-                    if(allSelectedChamps.includes(t2Champ)) {
+                    if (allSelectedChamps.includes(t2Champ)) {
                         validationError = `Le personnage "${t2Champ}" a été choisi plusieurs fois ou a été banni !`;
                         break;
                     }
@@ -396,7 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Prepare Batch Write
             const batch = db.batch();
-            
+
             // 1. Matches Collection
             const matchRef = db.collection("matches").doc();
             batch.set(matchRef, matchData);
@@ -417,14 +416,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // 3. Champions Collection (Picks) and Champion Scores Collection
             const addChampionScore = (teamData, teamId, roleKey) => {
                 if (!teamData.champion) return;
-                
+
                 // Increment pick
                 incrementStat(teamData.champion, "picks");
 
                 // Add score document
                 const scoreRef = db.collection("champion_scores").doc();
                 const isWin = matchData.winner === teamId;
-                
+
                 batch.set(scoreRef, {
                     champion_id: teamData.champion,
                     match_id: matchRef.id,
@@ -443,10 +442,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Execute Batch
             await batch.commit();
-            
+
             showMessage('Le match a été enregistré avec succès !', 'success');
             form.reset();
-            
+
         } catch (error) {
             console.error("Error adding document: ", error);
             showMessage('Erreur lors de l\'enregistrement : ' + error.message, 'error');
