@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const tabIndexMap = {
         't1_top_champ': 1, 't1_jungle_champ': 2, 't1_mid_champ': 3, 't1_bot_champ': 4, 't1_support_champ': 5,
         't2_top_champ': 6, 't2_jungle_champ': 7, 't2_mid_champ': 8, 't2_bot_champ': 9, 't2_support_champ': 10,
-        'ban_0': 11, 'ban_5': 12, 'ban_6': 13, 'ban_1': 14, 'ban_3': 15,
-        'ban_7': 16, 'ban_8': 17, 'ban_4': 18, 'ban_5': 19, 'ban_9': 20
+        'ban_0': 11, 'ban_5': 12, 'ban_6': 13, 'ban_1': 14, 'ban_2': 15,
+        'ban_7': 16, 'ban_8': 17, 'ban_3': 18, 'ban_4': 19, 'ban_9': 20
     };
 
     // Populate Bans
